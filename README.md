@@ -27,7 +27,7 @@ cmsRun DsTau3Mu-GEN-SIM-DIGI-RAW_cfg.py
 
 ##Instructions for 12_3_X (PU200):
 
-Production in 12_3_6, matching latest Phase-II development samples (as of August 2022), needed for HLT studies within CMSSW
+Production in 12_3_6, matching Phase-II development samples as of August 2022 (OUTDATED)
 
 ```
 git clone https://github.com/JanFSchulte/Tau3MuEventGeneration
@@ -40,7 +40,33 @@ cmsRun DsTau3Mu-GEN-SIM-DIGI-RAW_cfg.py
 
 ```
 
-## Note on Generator filter and  PU settings
+##Instructions for 12_5_2_patch1 (PU0 or PU200):
+
+Production in 12_5_2_patch1, matching latest Phase-II development samples. GEN-SIM and DIGI-RAW steps have to be run separately unfortunately.
+
+```
+git clone https://github.com/JanFSchulte/Tau3MuEventGeneration
+cmsrel CMSSW_12_5_2_patch1
+cd CMSSW_12_5_2_patch1/src
+git cms-addpkg GeneratorInterface/GenFilters
+cp ../../Tau3MuEventGeneration/filters/* GeneratorInterface/GenFilters/plugins
+scram b -j 8
+cp ../../Tau3MuEventGeneration/12_5/DsTau3Mu_GEN-SIM_PU0_cfg.py .
+cmsRun DsTau3Mu_GEN-SIM_PU0_cfg.py
+#for PU 0
+cp ../../Tau3MuEventGeneration/12_5/DsTau3Mu_GEN-SIM-DIGI-RAW_PU0_cfg.py .
+cmsRun DsTau3Mu_GEN-SIM-DIGI-RAW_PU0_cfg.py
+#for PU 200
+cp ../../Tau3MuEventGeneration/12_5/DsTau3Mu_GEN-SIM-DIGI-RAW_PU200_cfg.py .
+cmsRun DsTau3Mu_GEN-SIM-DIGI-RAW_PU200_cfg.py
+
+```
+
+##MC sample production via CRAB:
+
+To produce the ntuples used for GNN training, GEN-SIM-DIGI-RAW datatier is needed 
+
+## Note on Generator filter and  PU settings:
 
 Gnerator cuts on the muons can be changed by adjusting the filter configuraton in the lines
 
