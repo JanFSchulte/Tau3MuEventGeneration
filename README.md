@@ -1,7 +1,7 @@
 # Tau3MuEventGeneration
 Tools for event generation for the Tau3Mu GNN development
 
-##Instructions for 10_4_X (PU200):
+## Instructions for 10_4_X (PU200):
 
 Production in 10_4_X, matching currently used samples (as of August 2022) need to be performed in two separate releases for the GEN-SIM and DIGI steps
 
@@ -25,7 +25,7 @@ cp ../../Tau3MuEventGeneration/10_4/DsTau3Mu-GEN-SIM-DIGI-RAW_cfg.py .
 cmsRun DsTau3Mu-GEN-SIM-DIGI-RAW_cfg.py
 ```
 
-##Instructions for 12_3_X (PU200):
+## Instructions for 12_3_X (PU200):
 
 Production in 12_3_6, matching Phase-II development samples as of August 2022 (OUTDATED)
 
@@ -40,7 +40,7 @@ cmsRun DsTau3Mu-GEN-SIM-DIGI-RAW_cfg.py
 
 ```
 
-##Instructions for 12_5_2_patch1 (PU0 or PU200):
+## Instructions for 12_5_2_patch1 (PU0 or PU200):
 
 Production in 12_5_2_patch1, matching latest Phase-II development samples. GEN-SIM and DIGI-RAW steps have to be run separately unfortunately.
 
@@ -61,7 +61,7 @@ cp ../../Tau3MuEventGeneration/12_5/DsTau3Mu_GEN-SIM-DIGI-RAW_PU200_cfg.py .
 cmsRun DsTau3Mu_GEN-SIM-DIGI-RAW_PU200_cfg.py
 
 ```
-##Instructions for 13_3_0_patch3 (PU0 or PU200):
+## Instructions for 13_3_0_patch3 (PU0 or PU200):
 
 Production in 13_3_0_patch3, matching Osvaldo's development setup for the EMTF emulator. GEN-SIM and DIGI-RAW steps have to be run separately unfortunately.
 
@@ -69,9 +69,13 @@ Production in 13_3_0_patch3, matching Osvaldo's development setup for the EMTF e
 git clone https://github.com/JanFSchulte/Tau3MuEventGeneration
 cmsrel CMSSW_13_3_0_patch3
 cd CMSSW_13_3_0_patch3/src
+#get Osvaldo's emulator
+git cms-merge-topic -u 43766
+#add custom filter for 3 muons
 git cms-addpkg GeneratorInterface/GenFilters
-cp ../../Tau3MuEventGeneration/models/data L1Trigger/L1TMuonEndCapPhase2/
-cp -r  ../../
+cp ../../Tau3MuEventGeneration/filters/* GeneratorInterface/GenFilters/plugins
+#add EMTF model files for Osvaldo's emulator
+cp -r ../../Tau3MuEventGeneration/models/data L1Trigger/L1TMuonEndCapPhase2/
 scram b -j 8
 cp ../../Tau3MuEventGeneration/13_3/DsTau3Mu_GEN-SIM_PU0_cfg.py .
 cmsRun DsTau3Mu_GEN-SIM_PU0_cfg.py
