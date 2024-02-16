@@ -67,8 +67,8 @@ Production in 13_3_0_patch3, matching Osvaldo's development setup for the EMTF e
 
 ```
 git clone https://github.com/JanFSchulte/Tau3MuEventGeneration
-cmsrel CMSSW_13_3_0_patch3
-cd CMSSW_13_3_0_patch3/src
+cmsrel CMSSW_13_3_0_pre3
+cd CMSSW_13_3_0_pre3/src
 #get Osvaldo's emulator
 git cms-merge-topic -u 43766
 #add custom filter for 3 muons
